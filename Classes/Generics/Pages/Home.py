@@ -10,3 +10,7 @@ class Home(Page):
     def renderItems(self, window:tk.Tk) -> None:
         myButton = tk.Button(window, bg='#342266', text="next", command=lambda: self.controller.changePage('Teste'))
         myButton.grid(row=0, column=13)
+
+    def update(self):
+        if(self.controller.inputController.isPressed('a')):
+            print('Pressionando o "a"')

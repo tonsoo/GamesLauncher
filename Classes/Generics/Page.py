@@ -1,6 +1,7 @@
 import tkinter as tk
 from Definitions import Settings as conf
 from Classes.Generics.PageController import PageController
+import threading
 
 class Page:
 
@@ -11,7 +12,10 @@ class Page:
         self.pageIcon = pageIcon
         self.controller = pageController
         self.pageName = pageName
-    
+
+    def update(self):
+        ...
+
     def renderPage(self, window:tk.Tk):
         window.title(self.pageTitle)
         

@@ -1,20 +1,21 @@
 import Definitions.Settings as conf
 import tkinter as tk
 import sys
+import os
 import threading
+from Classes.Input.Controllers import KeyboardListener
 
 class PageController(threading.Thread):
+
+    mainWindow = None
+    inputController = None
 
     WIDTH = 640
     HEIGHT = 480
 
-    def __init__(self):
-        threading.Thread.__init__(self)
-        self.start()
-    
-    def run(self):
+    def __init__(self, inputController:KeyboardListener):
+        self.inputController = inputController
         self.mainWindow = tk.Tk()
-
         self.mainWindow.configure(background="#ffffff")
         self.mainWindow.resizable(False, False)
 
@@ -30,11 +31,22 @@ class PageController(threading.Thread):
 
         self.changePage('Home')
 
+        threading.Thread.__init__(self)
+        self.start()
+
+        self.mainWindow.protocol("WM_DELETE_WINDOW", self.close)
         self.mainWindow.mainloop()
     
-    def callback(self) -> None:
-        self.mainWindow.quit()
+    def run(self):
+        while self.mainWindow.state() == 'normal':
+            print(self.mainWindow.state())
+            if(self.currentPage != None):
+                self.currentPage.update()
     
+    def close(self):
+        self.mainWindow.destroy()
+        os._exit(1)
+
     def changePage(self, page: str) -> None:
         for widget in self.mainWindow.winfo_children():
             widget.destroy()
