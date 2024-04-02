@@ -9,5 +9,7 @@ class Teste(Page):
     
     def renderItems(self, window:tk.Tk) -> None:
         myButton = tk.Button(window, bg='#343434', text="next", command=lambda: self.controller.changePage('Home'))
-        myButton.place(x=40, y=80)
-        myButton.grid(row=10, column=13)
+        # myButton.place(x=40, y=80)
+        myButton.grid(row=10, column=40)
+
+        myButton.pack()

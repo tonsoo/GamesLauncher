@@ -1,5 +1,3 @@
-from Classes.Generics.PageController import PageController
-from Classes.Input.Controllers import KeyboardListener
+from Classes.App import App
 
-inputController = KeyboardListener()
-controller = PageController(inputController)
+app = App()
