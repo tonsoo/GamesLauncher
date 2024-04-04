@@ -4,6 +4,7 @@ import sys
 import os
 import threading
 from Classes.Input.Controllers import KeyboardListener
+import time
 
 class PageController(threading.Thread):
 
@@ -14,6 +15,8 @@ class PageController(threading.Thread):
     HEIGHT = 480
 
     def __init__(self, inputController:KeyboardListener):
+        self.fps = 60
+
         self.inputController = inputController
         self.mainWindow = tk.Tk()
         self.mainWindow.configure(background="#ffffff")
@@ -39,10 +42,19 @@ class PageController(threading.Thread):
     
     def run(self):
         while self.mainWindow.state() == 'normal':
-            print(self.mainWindow.state())
             if(self.currentPage != None):
-                self.currentPage.update()
+                try:
+                    time.sleep(1./self.fps)
+                    self.currentPage.update()
+                except:
+                    ...
     
+    def setFramerate(self, fps:int) -> None:
+        if(fps < 1):
+            return
+        
+        self.fps = fps
+
     def close(self):
         self.mainWindow.destroy()
         os._exit(1)

@@ -16,6 +16,12 @@ class Page:
     def update(self):
         ...
 
+    def keyDown(self, key:str) -> bool:
+        return self.controller.inputController.isPressed(key)
+    
+    def keyUp(self, key:str) -> bool:
+        return not self.controller.inputController.isPressed(key)
+
     def renderPage(self, window:tk.Tk):
         window.title(self.pageTitle)
         
