@@ -35,11 +35,13 @@ class PageController(threading.Thread):
         self.changePage('Home')
 
         threading.Thread.__init__(self)
-        self.start()
+
+        self.mainWindow.after(0, lambda: (self.start(), print('aloo')))
 
         self.mainWindow.protocol("WM_DELETE_WINDOW", self.close)
+
         self.mainWindow.mainloop()
-    
+
     def run(self):
         while self.mainWindow.state() == 'normal':
             if(self.currentPage != None):

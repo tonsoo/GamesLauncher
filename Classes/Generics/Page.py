@@ -32,7 +32,7 @@ class Page:
         self.renderItems(window)
         
     def renderItems(self, window:tk.Tk) -> None:
-        ...
+        window.mainloop()
     
     def changePage(self) -> None:
         self.controller.changePage(self.pageName)
