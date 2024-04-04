@@ -43,8 +43,11 @@ class PageController(threading.Thread):
     def run(self):
         while self.mainWindow.state() == 'normal':
             if(self.currentPage != None):
-                time.sleep(1./self.fps)
-                self.currentPage.update()
+                try:
+                    time.sleep(1./self.fps)
+                    self.currentPage.update()
+                except:
+                    ...
     
     def setFramerate(self, fps:int) -> None:
         if(fps < 1):
